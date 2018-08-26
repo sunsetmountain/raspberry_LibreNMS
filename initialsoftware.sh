@@ -92,8 +92,8 @@ sudo echo "$config['nagios_plugins'] = '/usr/lib/nagios/plugins';" >> /opt/libre
 cd ~
 git clone https://github.com/tleadley/speedtst
 cd speedtst
-sudo mv Scripts/speedtest /opt/speedtest
-sudo mv plugin/Speedtest /opt/librenms/html/plugins/Speedtest
+sudo mv Scripts/speedtest/ /opt/speedtest
+sudo mv plugin/Speedtest/ /opt/librenms/html/plugins/Speedtest
 
 # Update cron job
 sudo echo "*/30 * * * * librenms /opt/speedtest/speedtest.sh && /opt/speedtest/update-graph.sh" >> /etc/cron.d/librenms
