@@ -39,9 +39,13 @@ sudo nano config.php
 ```
 Change the values to the right of the equal sign for lines beginning with $config[db_] to match your database information as setup above.
 
-Change the value of $config['snmp']['community'][] from public to whatever your read-only SNMP community is. (e.g. $config['snmp']['community'][] = "myhome";)
--- note that the format in the original file could be $config['snmp']['community'] = array["public"] and should be changed
-
+Change the value of $config['snmp']['community'][] from public to whatever your read-only SNMP community is. Also add detection for your network IP range.
+```
+$config['snmp']['community'][] = "myhome";
+$config['discovery_by_ip'] = true;
+$config['nets'][] = "192.1698.0.0/24";
+```
+Note that the format in the original file could be $config['snmp']['community'] = array["public"] and should be changed
 
 Initialize the database:
 ```
