@@ -29,6 +29,7 @@ sudo nano config.php
 Change the values to the right of the equal sign for lines beginning with $config[db_] to match your database information as setup above.
 
 Change the value of $config['snmp']['community'][] from public to whatever your read-only SNMP community is. (e.g. $config['snmp']['community'][] = "myhome";)
+-- note that the format in the original file could be $config['snmp']['community'] = array["public"] and should be changed
 
 
 Initialize the database:
