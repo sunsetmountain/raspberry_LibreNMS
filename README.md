@@ -24,6 +24,13 @@ syscontact Call the HelpDesk
 Restart SNMP:
 sudo service snmpd restart
 
+Edit the SNMP configuration:
+sudo nano config.php
+Change the values to the right of the equal sign for lines beginning with $config[db_] to match your database information as setup above.
+
+Change the value of $config['snmp']['community'][] from public to whatever your read-only SNMP community is. (e.g. $config['snmp']['community'][] = "myhome";)
+
+
 Initialize the database:
 
 cd /opt/librenms/
