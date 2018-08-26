@@ -94,6 +94,7 @@ git clone https://github.com/tleadley/speedtst
 cd speedtst
 sudo mv Scripts/speedtest/ /opt/speedtest
 sudo mv plugin/Speedtest/ /opt/librenms/html/plugins/Speedtest
+sudo chmod +x /opt/speedtest/speedtest.sh /opt/speedtest/update_graph.sh /opt/speedtest/update_week.sh
 
 # Update cron job
 sudo echo "*/30 * * * * librenms /opt/speedtest/speedtest.sh && /opt/speedtest/update-graph.sh" >> /etc/cron.d/librenms
