@@ -11,11 +11,11 @@ Clone this repository:
 git clone https://github.com/sunsetmountain/raspberry_LibreNMS
 ```
 
-Change into the directory and run the installation script:
+Change into the directory and run the first script:
 ```
 cd raspberry_LibreNMS
-chmod +x initialsoftware.sh
-./initialsoftware.sh
+chmod +x step1.sh step2.sh
+./step1.sh
 ```
 
 Configure a basic SNMP config file – we will move the template and create a new file:
@@ -28,9 +28,10 @@ rocommunity infosoda
 syslocation My Laboratory
 syscontact Call the HelpDesk
 ```
-Restart SNMP:
+
+Run the second script:
 ```
-sudo service snmpd restart
+./step2.sh
 ```
 
 Edit the SNMP configuration:
