@@ -1,3 +1,5 @@
+# Referenced https://infosoda.com/librenms-raspberry-pi-2-3/ and https://docs.librenms.org/#Installation/Installation-Ubuntu-1604-Apache/
+
 # Install all of the core software needed for LibreNMS
 
 # Start at the beginning by going home.
@@ -5,11 +7,17 @@ cd ~
 
 # Make sure everything is up-to-date and then install core packages
 sudo apt-get update
-sudo apt-get -y install git python-pip python-dev mariadb-server mariadb-client
-sudo apt-get -y install libapache2-mod-php5 php5-cli php5-mysql php5-gd php5-snmp php-pear php5-curl snmp graphviz php5-mcrypt php5-json apache2 fping imagemagick whois mtr-tiny nmap python-mysqldb snmpd php-net-ipv4 php-net-ipv6 rrdtool
+sudo apt-get -y install mariadb-server mariadb-client
+sudo service mysql restart #restart mysql
+sudo apt-get -y install git python-pip python-dev python-memcache python-mysqldb
+sudo apt-get -y install acl libapache2-mod-php7.0 apache2 php-pear
+sudo apt-get -y install php7.0-cli php7.0-curl php7.0-gd php7.0-json php7.0-mbstring php7.0-mcrypt php7.0-mysql
+sudo apt-get -y install php7.0-zip php-net-ipv4 php-net-ipv6 php7.0-mcrypt php7.0-snmp php7.0-xml
+sudo apt-get -y install snmp snmpd graphviz fping imagemagick whois mtr-tiny 
+sudo apt-get -y install nmap rrdtool composer
 
-# Restart the SQL service
-sudo service mysql restart
+# Create the database
+sudo mysql -u root -e "source dbscript.sql"
 
 # Create a SNMP config file
 sudo mv /etc/snmp/snmpd.conf /etc/snmp/snmpd.conf.old
