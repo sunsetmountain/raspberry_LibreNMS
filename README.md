@@ -70,6 +70,7 @@ Discover the newly added localhost:
 ```
 php discovery.php -h all
 ```
+If all of the systems aren't detected, looking into using the snmp-scan.py script.
 
 Create a cronjob:
 ```
