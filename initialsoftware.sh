@@ -8,7 +8,7 @@ cd ~
 # Make sure everything is up-to-date and then install core packages
 sudo apt-get update
 sudo apt-get -y install mariadb-server mariadb-client
-sudo service mysql restart #restart mysql
+sudo service mysql restart #restart MySQL
 sudo apt-get -y install git python-pip python-dev python-memcache python-mysqldb
 sudo apt-get -y install acl libapache2-mod-php7.0 apache2 php-pear
 sudo apt-get -y install php7.0-cli php7.0-curl php7.0-gd php7.0-json php7.0-mbstring php7.0-mcrypt php7.0-mysql
@@ -19,12 +19,14 @@ sudo apt-get -y install nmap rrdtool composer
 # Create the database
 sudo mysql -u root -e "source dbscript.sql"
 
+# Add to the MySQL configuration file and restart MySQL
+sudo echo "[mysqld]" >> /etc/mysql/my.cnf
+sudo echo "innodb_file_per_table=1" >> /etc/mysql/my.cnf
+sudo service mysql restart #restart MySQL
+
 # Create a SNMP config file
-sudo mv /etc/snmp/snmpd.conf /etc/snmp/snmpd.conf.old
-sudo touch /etc/snmp/snmpd.conf
-sudo echo "rocommunity ourhome" >> /etc/snmp/snmpd.conf
-sudo echo "syslocation My Home" >> /etc/snmp/snmpd.conf
-sudo echo "syscontact Call the HelpDesk" >> /etc/snmp/snmpd.conf
+sudo cp /etc/snmp/snmpd.conf /etc/snmp/snmpd.conf.old
+# editing the file will need to be done manually
 
 # Restart the SNMP service
 sudo service snmpd restart
@@ -44,7 +46,7 @@ sudo chown -R librenms:librenms /opt/librenms
 sudo chmod 775 rrd
 
 # Create the conf file for Apache
-# sudo touch /etc/apache2/sites-available/librenms.conf
+sudo touch /etc/apache2/sites-available/librenms.conf
 
 # Add to the librenms.conf file
 sudo echo "<VirtualHost *:80>" >> /etc/apache2/sites-available/librenms.conf
@@ -61,7 +63,7 @@ sudo echo " </Directory>" >> /etc/apache2/sites-available/librenms.conf
 sudo echo "</VirtualHost>" >> /etc/apache2/sites-available/librenms.conf
 
 # Enable mcrypt
-sudo php5enmod mcrypt
+sudo phpenmod mcrypt
 
 # Load the website
 sudo a2ensite librenms.conf
@@ -74,6 +76,10 @@ sudo service apache2 reload
 
 # Configure the polling defaults
 sudo cp config.php.default config.php
+# file will need to be edited manually
 
 # Initialize the database
 sudo php build-base.php
+
+# Add an administrator/user
+sudo php adduser.php admin LibreNMS!123 10 admin@myhome.net #format is user password 10 email
