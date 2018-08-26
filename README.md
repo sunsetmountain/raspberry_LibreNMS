@@ -57,6 +57,8 @@ Add user in the following format:
 ```
 sudo php adduser.php <name> <pass> 10 <email>
 ```
+(e.g. sudo php adduser.php admin LibreNMS!123 10 admin@myhome.net)
+
 Validate the install, and correct any errors:
 ```
 sudo php validate.php 
