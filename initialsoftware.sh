@@ -14,7 +14,8 @@ sudo apt-get -y install acl libapache2-mod-php7.0 apache2 php-pear
 sudo apt-get -y install php7.0-cli php7.0-curl php7.0-gd php7.0-json php7.0-mbstring php7.0-mcrypt php7.0-mysql
 sudo apt-get -y install php7.0-zip php-net-ipv4 php-net-ipv6 php7.0-mcrypt php7.0-snmp php7.0-xml
 sudo apt-get -y install snmp snmpd graphviz fping imagemagick whois mtr-tiny 
-sudo apt-get -y install nmap rrdtool composer
+sudo apt-get -y install nmap rrdtool composer nagios-plugins
+sudo pip install speedtest-cli
 
 # Create the database
 sudo mysql -u root -e "source dbscript.sql"
@@ -83,3 +84,16 @@ sudo cp config.php.default config.php
 
 # Add an administrator/user
 #sudo php adduser.php admin LibreNMS!123 10 admin@myhome.net #format is user password 10 email
+
+# Add to the config.php file to allow for Nagios plugin usage
+sudo echo "$config['nagios_plugins'] = '/usr/lib/nagios/plugins';" >> /opt/librenms/config.php
+
+# Download files for speedtest use
+cd ~
+git clone https://github.com/tleadley/speedtst
+cd speedtst
+sudo mv Scripts/speedtest /opt/speedtest
+sudo mv plugin/Speedtest /opt/librenms/html/plugins/Speedtest
+
+# Update cron job
+sudo echo "*/30 * * * * librenms /opt/speedtest/speedtest.sh && /opt/speedtest/update-graph.sh" >> /etc/cron.d/librenms
