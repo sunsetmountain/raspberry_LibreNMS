@@ -46,13 +46,6 @@ sudo service apache2 reload
 
 # Configure the polling defaults
 sudo cp config.php.default config.php
-# file will need to be edited manually
-
-# Initialize the database
-#sudo php build-base.php
-
-# Add an administrator/user
-#sudo php adduser.php admin LibreNMS!123 10 admin@myhome.net #format is user password 10 email
 
 # Add to the config.php file to allow for Nagios plugin usage
 sudo echo "$config['nagios_plugins'] = '/usr/lib/nagios/plugins';" >> /opt/librenms/config.php
@@ -65,5 +58,8 @@ sudo mv Scripts/speedtest/ /opt/speedtest
 sudo mv plugin/Speedtest/ /opt/librenms/html/plugins/Speedtest
 sudo chmod +x /opt/speedtest/speedtest.sh /opt/speedtest/update_graph.sh /opt/speedtest/update_week.sh
 
-# Update cron job
-sudo echo "*/30 * * * * librenms /opt/speedtest/speedtest.sh && /opt/speedtest/update-graph.sh" >> /etc/cron.d/librenms
+# Update cron job (commented out for now due to inconsistencies in retrieving results)
+#sudo echo "*/30 * * * * librenms /opt/speedtest/speedtest.sh && /opt/speedtest/update-graph.sh" >> /etc/cron.d/librenms
+
+# Move back to the LibreNMS directory
+cd /opt/librenms
