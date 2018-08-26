@@ -79,7 +79,7 @@ sudo cp config.php.default config.php
 # file will need to be edited manually
 
 # Initialize the database
-sudo php build-base.php
+#sudo php build-base.php
 
 # Add an administrator/user
-sudo php adduser.php admin LibreNMS!123 10 admin@myhome.net #format is user password 10 email
+#sudo php adduser.php admin LibreNMS!123 10 admin@myhome.net #format is user password 10 email
